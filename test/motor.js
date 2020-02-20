@@ -1,7 +1,7 @@
 require("./common/bootstrap");
 
 exports["Motor: Non-Directional"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
     this.spy = this.sandbox.spy(MockFirmata.prototype, "analogWrite");
@@ -37,27 +37,27 @@ exports["Motor: Non-Directional"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  pinList: function(test) {
+  pinList: function (test) {
     test.expect(3);
 
     test.equal(this.motor.pins.pwm, 11);
@@ -67,7 +67,7 @@ exports["Motor: Non-Directional"] = {
     test.done();
   },
 
-  startStop: function(test) {
+  startStop: function (test) {
     test.expect(3);
 
     this.motor.start();
@@ -83,7 +83,7 @@ exports["Motor: Non-Directional"] = {
     test.done();
   },
 
-  startBrakeRelease: function(test) {
+  startBrakeRelease: function (test) {
     test.expect(3);
 
     this.motor.start();
@@ -99,7 +99,7 @@ exports["Motor: Non-Directional"] = {
     test.done();
   },
 
-  enablePin: function(test) {
+  enablePin: function (test) {
     test.expect(5);
 
     var motor = new Motor({
@@ -124,7 +124,7 @@ exports["Motor: Non-Directional"] = {
     test.done();
   },
 
-  threshold: function(test) {
+  threshold: function (test) {
     test.expect(2);
 
     this.motor.threshold = 30;
@@ -142,7 +142,7 @@ exports["Motor: Non-Directional"] = {
 };
 
 exports["Motor: Directional"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
     this.analogWrite = this.sandbox.spy(MockFirmata.prototype, "analogWrite");
@@ -177,27 +177,27 @@ exports["Motor: Directional"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  pinList: function(test) {
+  pinList: function (test) {
     test.expect(2);
 
     test.equal(this.motor.pins.pwm, 11);
@@ -206,7 +206,7 @@ exports["Motor: Directional"] = {
     test.done();
   },
 
-  startStop: function(test) {
+  startStop: function (test) {
     test.expect(3);
 
     this.analogWrite.reset();
@@ -224,7 +224,7 @@ exports["Motor: Directional"] = {
     test.done();
   },
 
-  forward: function(test) {
+  forward: function (test) {
     test.expect(2);
 
     this.motor.forward(128);
@@ -234,7 +234,7 @@ exports["Motor: Directional"] = {
     test.done();
   },
 
-  reverse: function(test) {
+  reverse: function (test) {
     test.expect(2);
 
     this.motor.reverse(128);
@@ -244,7 +244,7 @@ exports["Motor: Directional"] = {
     test.done();
   },
 
-  brake: function(test) {
+  brake: function (test) {
     test.expect(6);
 
     this.motor.rev(128);
@@ -278,7 +278,7 @@ exports["Motor: Directional"] = {
     test.done();
   },
 
-  threshold: function(test) {
+  threshold: function (test) {
     test.expect(3);
 
     this.motor.threshold = 30;
@@ -300,7 +300,7 @@ exports["Motor: Directional"] = {
     test.done();
   },
 
-  enablePin: function(test) {
+  enablePin: function (test) {
     test.expect(5);
 
     var motor = new Motor({
@@ -328,7 +328,7 @@ exports["Motor: Directional"] = {
 };
 
 exports["Motor: Directional with no speed passed"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
     this.analogWrite = this.sandbox.spy(MockFirmata.prototype, "analogWrite");
@@ -363,28 +363,28 @@ exports["Motor: Directional with no speed passed"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
 
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  start: function(test) {
+  start: function (test) {
     test.expect(6);
 
     this.motor.forward();
@@ -418,7 +418,7 @@ exports["Motor: Directional with no speed passed"] = {
     test.done();
   },
 
-  threshold: function(test) {
+  threshold: function (test) {
     test.expect(3);
 
     this.motor.threshold = 30;
@@ -440,7 +440,7 @@ exports["Motor: Directional with no speed passed"] = {
 };
 
 exports["Motor: Directional with Brake"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
     this.analogWrite = this.sandbox.spy(MockFirmata.prototype, "analogWrite");
@@ -491,27 +491,27 @@ exports["Motor: Directional with Brake"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  pinList: function(test) {
+  pinList: function (test) {
     test.expect(3);
 
     test.equal(this.motor.pins.pwm, 3);
@@ -521,7 +521,7 @@ exports["Motor: Directional with Brake"] = {
     test.done();
   },
 
-  startStop: function(test) {
+  startStop: function (test) {
     test.expect(2);
 
     this.motor.start();
@@ -535,7 +535,7 @@ exports["Motor: Directional with Brake"] = {
     test.done();
   },
 
-  forward: function(test) {
+  forward: function (test) {
     test.expect(2);
 
     this.motor.forward(128);
@@ -545,7 +545,7 @@ exports["Motor: Directional with Brake"] = {
     test.done();
   },
 
-  reverse: function(test) {
+  reverse: function (test) {
     test.expect(2);
 
     this.motor.reverse(128);
@@ -555,7 +555,7 @@ exports["Motor: Directional with Brake"] = {
     test.done();
   },
 
-  brake: function(test) {
+  brake: function (test) {
     test.expect(14);
 
     this.motor.rev(128);
@@ -599,7 +599,7 @@ exports["Motor: Directional with Brake"] = {
     test.done();
   },
 
-  timedBrake: function(test) {
+  timedBrake: function (test) {
     var clock = sinon.useFakeTimers();
     test.expect(5);
 
@@ -624,7 +624,7 @@ exports["Motor: Directional with Brake"] = {
     test.done();
   },
 
-  threshold: function(test) {
+  threshold: function (test) {
     test.expect(7);
 
     this.motor.threshold = 30;
@@ -653,7 +653,7 @@ exports["Motor: Directional with Brake"] = {
 };
 
 exports["Motor: Directional with Current Sensing Pin"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
     this.analogWrite = this.sandbox.spy(MockFirmata.prototype, "analogWrite");
@@ -709,27 +709,27 @@ exports["Motor: Directional with Current Sensing Pin"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  current: function(test) {
+  current: function (test) {
     test.expect(1);
 
     test.ok(this.motor.current instanceof Sensor);
@@ -737,7 +737,7 @@ exports["Motor: Directional with Current Sensing Pin"] = {
     test.done();
   },
 
-  pinList: function(test) {
+  pinList: function (test) {
     test.expect(3);
 
     test.equal(this.motor.pins.pwm, 3);
@@ -750,7 +750,7 @@ exports["Motor: Directional with Current Sensing Pin"] = {
 };
 
 exports["Motor: Directional - Three Pin"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
     this.analogWrite = this.sandbox.spy(MockFirmata.prototype, "analogWrite");
@@ -793,27 +793,27 @@ exports["Motor: Directional - Three Pin"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  pinList: function(test) {
+  pinList: function (test) {
     test.expect(3);
 
     test.equal(this.motor.pins.pwm, 11);
@@ -823,7 +823,7 @@ exports["Motor: Directional - Three Pin"] = {
     test.done();
   },
 
-  start: function(test) {
+  start: function (test) {
     test.expect(3);
 
     this.motor.start();
@@ -834,7 +834,7 @@ exports["Motor: Directional - Three Pin"] = {
     test.done();
   },
 
-  stop: function(test) {
+  stop: function (test) {
     test.expect(1);
 
     this.motor.stop();
@@ -843,7 +843,7 @@ exports["Motor: Directional - Three Pin"] = {
     test.done();
   },
 
-  forward: function(test) {
+  forward: function (test) {
     test.expect(3);
 
     this.analogWrite.reset();
@@ -856,7 +856,7 @@ exports["Motor: Directional - Three Pin"] = {
     test.done();
   },
 
-  reverse: function(test) {
+  reverse: function (test) {
     test.expect(3);
 
     this.analogWrite.reset();
@@ -869,7 +869,7 @@ exports["Motor: Directional - Three Pin"] = {
     test.done();
   },
 
-  brakeRelease: function(test) {
+  brakeRelease: function (test) {
     test.expect(6);
 
     this.motor.rev(128);
@@ -892,7 +892,7 @@ exports["Motor: Directional - Three Pin"] = {
     test.done();
   },
 
-  enablePin: function(test) {
+  enablePin: function (test) {
     test.expect(5);
 
     var motor = new Motor({
@@ -922,7 +922,7 @@ exports["Motor: Directional - Three Pin"] = {
 };
 
 exports["Motor: Inverse Speed When Forward"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
     this.analogWrite = this.sandbox.spy(MockFirmata.prototype, "analogWrite");
@@ -968,27 +968,27 @@ exports["Motor: Inverse Speed When Forward"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  pinList: function(test) {
+  pinList: function (test) {
     test.expect(3);
 
     test.equal(this.motor.opts.invertPWM, true);
@@ -999,7 +999,7 @@ exports["Motor: Inverse Speed When Forward"] = {
     test.done();
   },
 
-  forward: function(test) {
+  forward: function (test) {
     test.expect(6);
 
     this.motor.forward(255);
@@ -1025,7 +1025,7 @@ exports["Motor: Inverse Speed When Forward"] = {
     test.done();
   },
 
-  reverse: function(test) {
+  reverse: function (test) {
     test.expect(6);
 
     this.motor.reverse(255);
@@ -1051,7 +1051,7 @@ exports["Motor: Inverse Speed When Forward"] = {
     test.done();
   },
 
-  brake: function(test) {
+  brake: function (test) {
     test.expect(8);
 
     this.motor.forward(255);
@@ -1088,7 +1088,7 @@ exports["Motor: Inverse Speed When Forward"] = {
     test.done();
   },
 
-  threshold: function(test) {
+  threshold: function (test) {
     test.expect(4);
 
     this.motor.threshold = 30;
@@ -1112,7 +1112,7 @@ exports["Motor: Inverse Speed When Forward"] = {
 };
 
 exports["Motor: Inverse Speed With Brake"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
     this.analogWrite = this.sandbox.spy(MockFirmata.prototype, "analogWrite");
@@ -1162,27 +1162,27 @@ exports["Motor: Inverse Speed With Brake"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  brake: function(test) {
+  brake: function (test) {
     test.expect(17);
 
     this.motor.forward(255);
@@ -1230,7 +1230,7 @@ exports["Motor: Inverse Speed With Brake"] = {
 };
 
 exports["Motor: 10-Bit"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
 
@@ -1269,27 +1269,27 @@ exports["Motor: 10-Bit"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  startStop: function(test) {
+  startStop: function (test) {
     test.expect(3);
 
     this.analogWrite.reset();
@@ -1307,7 +1307,7 @@ exports["Motor: 10-Bit"] = {
     test.done();
   },
 
-  forward: function(test) {
+  forward: function (test) {
     test.expect(2);
 
     this.motor.forward(128);
@@ -1317,7 +1317,7 @@ exports["Motor: 10-Bit"] = {
     test.done();
   },
 
-  reverse: function(test) {
+  reverse: function (test) {
     test.expect(2);
 
     this.motor.reverse(128);
@@ -1327,7 +1327,7 @@ exports["Motor: 10-Bit"] = {
     test.done();
   },
 
-  brake: function(test) {
+  brake: function (test) {
     test.expect(6);
 
     this.motor.rev(128);
@@ -1363,7 +1363,7 @@ exports["Motor: 10-Bit"] = {
 };
 
 exports["Motor: 10-Bit With Inverse"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
 
@@ -1403,27 +1403,27 @@ exports["Motor: 10-Bit With Inverse"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  startStop: function(test) {
+  startStop: function (test) {
     test.expect(3);
 
     this.analogWrite.reset();
@@ -1441,7 +1441,7 @@ exports["Motor: 10-Bit With Inverse"] = {
     test.done();
   },
 
-  forward: function(test) {
+  forward: function (test) {
     test.expect(2);
 
     this.motor.forward(128);
@@ -1451,7 +1451,7 @@ exports["Motor: 10-Bit With Inverse"] = {
     test.done();
   },
 
-  reverse: function(test) {
+  reverse: function (test) {
     test.expect(2);
 
     this.motor.reverse(128);
@@ -1461,7 +1461,7 @@ exports["Motor: 10-Bit With Inverse"] = {
     test.done();
   },
 
-  brake: function(test) {
+  brake: function (test) {
     test.expect(7);
 
     this.motor.rev(128);
@@ -1498,7 +1498,7 @@ exports["Motor: 10-Bit With Inverse"] = {
 };
 
 exports["Motor: I2C - PCA9685"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
     this.normalize = this.sandbox.spy(Board.Pins, "normalize");
@@ -1544,14 +1544,14 @@ exports["Motor: I2C - PCA9685"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     Expander.purge();
     done();
   },
 
-  fwdOptionsToi2cConfig: function(test) {
+  fwdOptionsToi2cConfig: function (test) {
     test.expect(3);
 
     this.i2cConfig.reset();
@@ -1573,13 +1573,13 @@ exports["Motor: I2C - PCA9685"] = {
     test.done();
   },
 
-  defaultFrequency: function(test) {
+  defaultFrequency: function (test) {
     test.expect(1);
     test.equal(this.motor.frequency, 50);
     test.done();
   },
 
-  customFrequency: function(test) {
+  customFrequency: function (test) {
     test.expect(1);
 
     this.motor = new Motor({
@@ -1594,27 +1594,27 @@ exports["Motor: I2C - PCA9685"] = {
     test.done();
   },
 
-  noNormalization: function(test) {
+  noNormalization: function (test) {
     test.expect(1);
     test.equal(this.normalize.callCount, 0);
     test.done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  pinList: function(test) {
+  pinList: function (test) {
     test.expect(3);
 
     test.equal(this.motor.pins.pwm, 8);
@@ -1624,7 +1624,7 @@ exports["Motor: I2C - PCA9685"] = {
     test.done();
   },
 
-  start: function(test) {
+  start: function (test) {
     test.expect(6);
     this.i2cWrite.reset();
 
@@ -1639,7 +1639,7 @@ exports["Motor: I2C - PCA9685"] = {
     test.done();
   },
 
-  stop: function(test) {
+  stop: function (test) {
     test.expect(6);
     this.i2cWrite.reset();
     this.motor.stop();
@@ -1655,7 +1655,7 @@ exports["Motor: I2C - PCA9685"] = {
     test.done();
   },
 
-  forward: function(test) {
+  forward: function (test) {
     test.expect(21);
     this.i2cWrite.reset();
 
@@ -1689,7 +1689,7 @@ exports["Motor: I2C - PCA9685"] = {
     test.done();
   },
 
-  reverse: function(test) {
+  reverse: function (test) {
     test.expect(21);
     this.i2cWrite.reset();
 
@@ -1724,7 +1724,7 @@ exports["Motor: I2C - PCA9685"] = {
     test.done();
   },
 
-  brakeRelease: function(test) {
+  brakeRelease: function (test) {
     test.expect(42);
     this.i2cWrite.reset();
 
@@ -1797,7 +1797,7 @@ exports["Motor: I2C - PCA9685"] = {
 };
 
 exports["Motor: ShiftRegister"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
     this.digitalWrite = this.sandbox.spy(MockFirmata.prototype, "digitalWrite");
@@ -1852,27 +1852,27 @@ exports["Motor: ShiftRegister"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  pinList: function(test) {
+  pinList: function (test) {
     test.expect(1);
 
     test.equal(this.motor.pins.pwm, 11);
@@ -1880,7 +1880,7 @@ exports["Motor: ShiftRegister"] = {
     test.done();
   },
 
-  start: function(test) {
+  start: function (test) {
     test.expect(1);
 
     this.motor.start();
@@ -1890,7 +1890,7 @@ exports["Motor: ShiftRegister"] = {
     test.done();
   },
 
-  stop: function(test) {
+  stop: function (test) {
     test.expect(1);
 
     this.motor.stop();
@@ -1900,7 +1900,7 @@ exports["Motor: ShiftRegister"] = {
     test.done();
   },
 
-  forward: function(test) {
+  forward: function (test) {
     test.expect(4);
 
     this.motor.forward(128);
@@ -1914,7 +1914,7 @@ exports["Motor: ShiftRegister"] = {
     test.done();
   },
 
-  reverse: function(test) {
+  reverse: function (test) {
     test.expect(4);
 
     this.motor.reverse(128);
@@ -1930,7 +1930,7 @@ exports["Motor: ShiftRegister"] = {
 };
 
 exports["Motor: EVS_EV3"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
 
@@ -1978,27 +1978,27 @@ exports["Motor: EVS_EV3"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  pinList: function(test) {
+  pinList: function (test) {
     test.expect(1);
 
     test.equal(this.motor.pins.pwm, "BBM2");
@@ -2006,7 +2006,7 @@ exports["Motor: EVS_EV3"] = {
     test.done();
   },
 
-  start: function(test) {
+  start: function (test) {
     test.expect(1);
 
     this.motor.start();
@@ -2029,7 +2029,7 @@ exports["Motor: EVS_EV3"] = {
     test.done();
   },
 
-  stop: function(test) {
+  stop: function (test) {
     test.expect(1);
 
     this.motor.stop();
@@ -2053,7 +2053,7 @@ exports["Motor: EVS_EV3"] = {
     test.done();
   },
 
-  forward: function(test) {
+  forward: function (test) {
     test.expect(1);
 
     this.motor.forward(128);
@@ -2076,7 +2076,7 @@ exports["Motor: EVS_EV3"] = {
     test.done();
   },
 
-  reverse: function(test) {
+  reverse: function (test) {
     test.expect(1);
 
     this.motor.reverse(128);
@@ -2102,7 +2102,7 @@ exports["Motor: EVS_EV3"] = {
 
 
 exports["Motor: EVS_NXT"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
 
@@ -2150,27 +2150,27 @@ exports["Motor: EVS_NXT"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.motor[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.motor[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  pinList: function(test) {
+  pinList: function (test) {
     test.expect(1);
 
     test.equal(this.motor.pins.pwm, "BBM2");
@@ -2178,7 +2178,7 @@ exports["Motor: EVS_NXT"] = {
     test.done();
   },
 
-  start: function(test) {
+  start: function (test) {
     test.expect(1);
 
     this.motor.start();
@@ -2201,7 +2201,7 @@ exports["Motor: EVS_NXT"] = {
     test.done();
   },
 
-  stop: function(test) {
+  stop: function (test) {
     test.expect(1);
 
     this.motor.stop();
@@ -2225,7 +2225,7 @@ exports["Motor: EVS_NXT"] = {
     test.done();
   },
 
-  forward: function(test) {
+  forward: function (test) {
     test.expect(1);
 
     this.motor.forward(128);
@@ -2248,7 +2248,7 @@ exports["Motor: EVS_NXT"] = {
     test.done();
   },
 
-  reverse: function(test) {
+  reverse: function (test) {
     test.expect(1);
 
     this.motor.reverse(128);
@@ -2273,7 +2273,7 @@ exports["Motor: EVS_NXT"] = {
 };
 
 exports["Motor.Collection"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
 
@@ -2308,20 +2308,20 @@ exports["Motor.Collection"] = {
       "start", "stop"
     ];
 
-    this.spies.forEach(function(method) {
+    this.spies.forEach(function (method) {
       this[method] = this.sandbox.spy(Motor.prototype, method);
     }.bind(this));
 
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  initFromMotorNumbers: function(test) {
+  initFromMotorNumbers: function (test) {
     test.expect(4);
 
     var motors = new Motor.Collection([{
@@ -2346,11 +2346,11 @@ exports["Motor.Collection"] = {
     test.equal(motors[0] instanceof Motor, true);
     test.equal(motors[1] instanceof Motor, true);
     test.equal(motors[2] instanceof Motor, true);
-  
+
     test.done();
   },
 
-  initFromMotors: function(test) {
+  initFromMotors: function (test) {
     test.expect(4);
 
     var motors = new Motor.Collection([
@@ -2360,12 +2360,12 @@ exports["Motor.Collection"] = {
     test.equal(motors[0] instanceof Motor, true);
     test.equal(motors[1] instanceof Motor, true);
     test.equal(motors[2] instanceof Motor, true);
-    
-  test.equal(motors.length, 3);
+
+    test.equal(motors.length, 3);
     test.done();
   },
 
-  callForwarding: function(test) {
+  callForwarding: function (test) {
     test.expect(7);
 
     var motors = new Motor.Collection([{
@@ -2402,7 +2402,7 @@ exports["Motor.Collection"] = {
     test.done();
   },
 
-  collectionFromArray: function(test) {
+  collectionFromArray: function (test) {
     test.expect(12);
 
     var motors = new Motor.Collection([this.a, this.b]);
@@ -2425,7 +2425,7 @@ exports["Motor.Collection"] = {
     test.equal(collectionFromArray[0][0] instanceof Motor, true);
     test.equal(collectionFromArray[0][1] instanceof Motor, true);
     test.equal(collectionFromArray[1] instanceof Motor, true);
-    
+
     test.equal(this.stop.callCount, 3);
 
     test.done();
@@ -2434,7 +2434,7 @@ exports["Motor.Collection"] = {
 };
 
 exports["Motor: GROVE_I2C_MOTOR_DRIVER"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
 
@@ -2483,13 +2483,13 @@ exports["Motor: GROVE_I2C_MOTOR_DRIVER"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     done();
   },
 
-  fwdOptionsToi2cConfig: function(test) {
+  fwdOptionsToi2cConfig: function (test) {
     test.expect(3);
 
     this.i2cConfig.reset();
@@ -2511,28 +2511,28 @@ exports["Motor: GROVE_I2C_MOTOR_DRIVER"] = {
     test.done();
   },
 
-  shape: function(test) {
+  shape: function (test) {
     test.expect(this.proto.length + this.instance.length);
 
-    this.proto.forEach(function(method) {
+    this.proto.forEach(function (method) {
       test.equal(typeof this.a[method.name], "function");
     }, this);
 
-    this.instance.forEach(function(property) {
+    this.instance.forEach(function (property) {
       test.notEqual(typeof this.a[property.name], "undefined");
     }, this);
 
     test.done();
   },
 
-  pinList: function(test) {
+  pinList: function (test) {
     test.expect(2);
     test.equal(this.a.pins.pwm, "A");
     test.equal(this.a.pins.dir, "A");
     test.done();
   },
 
-  start: function(test) {
+  start: function (test) {
     test.expect(1);
 
     this.a.start();
@@ -2543,7 +2543,7 @@ exports["Motor: GROVE_I2C_MOTOR_DRIVER"] = {
     test.done();
   },
 
-  stop: function(test) {
+  stop: function (test) {
     test.expect(1);
 
     this.a.stop();
@@ -2554,7 +2554,7 @@ exports["Motor: GROVE_I2C_MOTOR_DRIVER"] = {
     test.done();
   },
 
-  forward: function(test) {
+  forward: function (test) {
     test.expect(2);
 
     this.i2cWrite.reset();
@@ -2570,7 +2570,7 @@ exports["Motor: GROVE_I2C_MOTOR_DRIVER"] = {
     test.done();
   },
 
-  reverse: function(test) {
+  reverse: function (test) {
     test.expect(2);
 
     this.i2cWrite.reset();
@@ -2587,7 +2587,7 @@ exports["Motor: GROVE_I2C_MOTOR_DRIVER"] = {
     test.done();
   },
 
-  forwardControlBoth: function(test) {
+  forwardControlBoth: function (test) {
     test.expect(6);
 
     this.b = new Motor({
@@ -2634,7 +2634,7 @@ exports["Motor: GROVE_I2C_MOTOR_DRIVER"] = {
     test.done();
   },
 
-  reverseControlBoth: function(test) {
+  reverseControlBoth: function (test) {
     test.expect(6);
 
     this.b = new Motor({
@@ -2682,8 +2682,257 @@ exports["Motor: GROVE_I2C_MOTOR_DRIVER"] = {
   }
 };
 
+exports["Motor: GROVE_I2C_TB6612FNG"] = {
+  setUp: function (done) {
+    this.sandbox = sinon.sandbox.create();
+    this.board = newBoard();
+
+    this.i2cConfig = this.sandbox.spy(MockFirmata.prototype, "i2cConfig");
+    this.i2cWrite = this.sandbox.spy(MockFirmata.prototype, "i2cWrite");
+
+    this.a = new Motor({
+      controller: "GROVE_I2C_TB6612FNG",
+      pin: "A",
+      board: this.board
+    });
+
+    this.dir = this.sandbox.spy(this.a, "dir");
+    this.speed = this.sandbox.spy(this.a, "speed");
+
+    this.proto = [{
+      name: "dir"
+    }, {
+      name: "start"
+    }, {
+      name: "stop"
+    }, {
+      name: "forward"
+    }, {
+      name: "fwd"
+    }, {
+      name: "reverse"
+    }, {
+      name: "rev"
+    }, {
+      name: "resume"
+    }, {
+      name: "setPin"
+    }, {
+      name: "setPWM"
+    }];
+
+    this.instance = [{
+      name: "pins"
+    }, {
+      name: "threshold"
+    }, {
+      name: "speed"
+    }];
+
+    done();
+  },
+
+  tearDown: function (done) {
+    Board.purge();
+    this.sandbox.restore();
+    done();
+  },
+
+  fwdOptionsToi2cConfig: function (test) {
+    test.expect(3);
+
+    this.i2cConfig.reset();
+
+    new Motor({
+      controller: "GROVE_I2C_TB6612FNG",
+      address: 0x14,
+      bus: "i2c-1",
+      pin: "A",
+      board: this.board
+    });
+
+    var forwarded = this.i2cConfig.lastCall.args[0];
+
+    test.equal(this.i2cConfig.callCount, 1);
+    test.equal(forwarded.address, 0x14);
+    test.equal(forwarded.bus, "i2c-1");
+
+    test.done();
+  },
+
+  shape: function (test) {
+    test.expect(this.proto.length + this.instance.length);
+
+    this.proto.forEach(function (method) {
+      test.equal(typeof this.a[method.name], "function");
+    }, this);
+
+    this.instance.forEach(function (property) {
+      test.notEqual(typeof this.a[property.name], "undefined");
+    }, this);
+
+    test.done();
+  },
+
+  pinList: function (test) {
+    test.expect(2);
+    test.equal(this.a.pins.pwm, "A");
+    test.equal(this.a.pins.dir, "A");
+    test.done();
+  },
+
+  start: function (test) {
+    test.expect(1);
+
+    this.a.start();
+
+    test.deepEqual(
+      this.i2cWrite.lastCall.args[1], [this.a.COMMANDS.SET_SPEED, 128, 0]
+    );
+    test.done();
+  },
+
+  stop: function (test) {
+    test.expect(1);
+
+    this.a.stop();
+
+    test.deepEqual(
+      this.i2cWrite.lastCall.args[1], [this.a.COMMANDS.SET_SPEED, 0, 0]
+    );
+    test.done();
+  },
+
+  forward: function (test) {
+    test.expect(2);
+
+    this.i2cWrite.reset();
+    this.a.forward(128);
+
+    test.deepEqual(
+      this.i2cWrite.getCall(1).args[1], [this.a.COMMANDS.SET_DIRECTION, 5, 1]
+    );
+
+    test.deepEqual(
+      this.i2cWrite.getCall(2).args[1], [this.a.COMMANDS.SET_SPEED, 128, 0]
+    );
+    test.done();
+  },
+
+  reverse: function (test) {
+    test.expect(2);
+
+    this.i2cWrite.reset();
+    this.a.reverse(128);
+
+    test.deepEqual(
+      this.i2cWrite.getCall(1).args[1], [this.a.COMMANDS.SET_DIRECTION, 6, 1]
+    );
+
+    test.deepEqual(
+      this.i2cWrite.getCall(2).args[1], [this.a.COMMANDS.SET_SPEED, 128, 0]
+    );
+
+    test.done();
+  },
+
+  forwardControlBoth: function (test) {
+    test.expect(6);
+
+    this.b = new Motor({
+      controller: "GROVE_I2C_TB6612FNG",
+      pin: "B",
+      board: this.board
+    });
+
+
+    this.i2cWrite.reset();
+
+    this.a.forward(128);
+    this.b.forward(128);
+
+    // A stop
+    test.deepEqual(
+      this.i2cWrite.getCall(0).args[1], [this.a.COMMANDS.SET_SPEED, 0, 0]
+    );
+
+    // A fwd
+    test.deepEqual(
+      this.i2cWrite.getCall(1).args[1], [this.a.COMMANDS.SET_DIRECTION, 5, 1]
+    );
+
+    // A speed
+    test.deepEqual(
+      this.i2cWrite.getCall(2).args[1], [this.a.COMMANDS.SET_SPEED, 128, 0]
+    );
+
+    // B stop
+    test.deepEqual(
+      this.i2cWrite.getCall(3).args[1], [this.a.COMMANDS.SET_SPEED, 128, 0]
+    );
+
+    // B fwd
+    test.deepEqual(
+      this.i2cWrite.getCall(4).args[1], [this.a.COMMANDS.SET_DIRECTION, 5, 1]
+    );
+
+    // B speed
+    test.deepEqual(
+      this.i2cWrite.getCall(5).args[1], [this.a.COMMANDS.SET_SPEED, 128, 128]
+    );
+    test.done();
+  },
+
+  reverseControlBoth: function (test) {
+    test.expect(6);
+
+    this.b = new Motor({
+      controller: "GROVE_I2C_TB6612FNG",
+      pin: "B",
+      board: this.board
+    });
+
+
+    this.i2cWrite.reset();
+
+    this.a.reverse(128);
+    this.b.reverse(128);
+
+    // A stop
+    test.deepEqual(
+      this.i2cWrite.getCall(0).args[1], [this.a.COMMANDS.SET_SPEED, 0, 0]
+    );
+
+    // A rev
+    test.deepEqual(
+      this.i2cWrite.getCall(1).args[1], [this.a.COMMANDS.SET_DIRECTION, 6, 1]
+    );
+
+    // A speed
+    test.deepEqual(
+      this.i2cWrite.getCall(2).args[1], [this.a.COMMANDS.SET_SPEED, 128, 0]
+    );
+
+    // B stop
+    test.deepEqual(
+      this.i2cWrite.getCall(3).args[1], [this.a.COMMANDS.SET_SPEED, 128, 0]
+    );
+
+    // B rev
+    test.deepEqual(
+      this.i2cWrite.getCall(4).args[1], [this.a.COMMANDS.SET_DIRECTION, 10, 1]
+    );
+
+    // B speed
+    test.deepEqual(
+      this.i2cWrite.getCall(5).args[1], [this.a.COMMANDS.SET_SPEED, 128, 128]
+    );
+    test.done();
+  }
+};
+
 exports["Motor: Require Pins"] = {
-  setUp: function(done) {
+  setUp: function (done) {
     this.sandbox = sinon.sandbox.create();
     this.board = newBoard();
 
@@ -2720,27 +2969,27 @@ exports["Motor: Require Pins"] = {
     done();
   },
 
-  tearDown: function(done) {
+  tearDown: function (done) {
     Board.purge();
     this.sandbox.restore();
     Expander.purge();
     done();
   },
 
-  nondirectionalMissingPins: function(test) {
+  nondirectionalMissingPins: function (test) {
     test.expect(3);
-    
-    test.throws(function() {
+
+    test.throws(function () {
       new Motor();
     }, "PWM pin must be defined");
-    
-    test.throws(function() {
+
+    test.throws(function () {
       new Motor({
         device: "NONDIRECTIONAL"
       });
     }, "PWM pin must be defined");
 
-    test.throws(function() {
+    test.throws(function () {
       new Motor({
         device: "NONDIRECTIONAL",
         pins: {
@@ -2751,24 +3000,24 @@ exports["Motor: Require Pins"] = {
 
     test.done();
   },
-  
-  directionalMissingPins: function(test) {
+
+  directionalMissingPins: function (test) {
     test.expect(4);
-    
-    test.throws(function() {
+
+    test.throws(function () {
       new Motor({
         device: "DIRECTIONAL"
       });
     }, "PWM pin must be defined");
 
-    test.throws(function() {
+    test.throws(function () {
       new Motor({
         device: "DIRECTIONAL",
         pins: [1]
       });
     }, "DIR pin must be defined");
 
-    test.throws(function() {
+    test.throws(function () {
       new Motor({
         device: "DIRECTIONAL",
         pins: {
@@ -2777,7 +3026,7 @@ exports["Motor: Require Pins"] = {
       });
     }, "DIR pin must be defined");
 
-    test.throws(function() {
+    test.throws(function () {
       new Motor({
         device: "DIRECTIONAL",
         pins: {
@@ -2789,24 +3038,24 @@ exports["Motor: Require Pins"] = {
 
     test.done();
   },
-  
-  cdirMissingPins: function(test) {
+
+  cdirMissingPins: function (test) {
     test.expect(4);
-    
-    test.throws(function() {
+
+    test.throws(function () {
       new Motor({
         device: "CDIR"
       });
     }, "PWM pin must be defined");
 
-    test.throws(function() {
+    test.throws(function () {
       new Motor({
         device: "CDIR",
         pins: [1, 2]
       });
     }, "CDIR pin must be defined");
 
-    test.throws(function() {
+    test.throws(function () {
       new Motor({
         device: "CDIR",
         pins: {
@@ -2815,7 +3064,7 @@ exports["Motor: Require Pins"] = {
       });
     }, "CDIR pin must be defined");
 
-    test.throws(function() {
+    test.throws(function () {
       new Motor({
         device: "CDIR",
         pins: {
@@ -2829,7 +3078,7 @@ exports["Motor: Require Pins"] = {
   }
 };
 
-Object.keys(Motor.Controllers).forEach(function(name) {
+Object.keys(Motor.Controllers).forEach(function (name) {
 
   // These are duplicates
   if (name.startsWith("GROVE_") || name.startsWith("EVS_") || name.startsWith("Shift")) {
